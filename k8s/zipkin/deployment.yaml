@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tradeflux-zipkin
+  namespace: tradeflux
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: zipkin
+
+  template:
+    metadata:
+      labels:
+        app: zipkin
+
+    spec:
+      containers:
+        - name: zipkin
+          image: openzipkin/zipkin:latest
+
+          ports:
+            - containerPort: 9411

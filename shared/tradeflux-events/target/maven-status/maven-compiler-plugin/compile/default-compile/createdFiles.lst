@@ -1,0 +1,11 @@
+com\tradeflux\events\OrderPlacedEvent$OrderPlacedEventBuilder.class
+com\tradeflux\events\enums\OrderStatus.class
+com\tradeflux\events\OrderPlacedEvent.class
+com\tradeflux\events\enums\OrderType.class
+com\tradeflux\events\enums\OrderSide.class
+com\tradeflux\events\UserRegisteredEvent.class
+com\tradeflux\events\OrderCancelledEvent$OrderCancelledEventBuilder.class
+com\tradeflux\events\OrderExecutedEvent.class
+com\tradeflux\events\OrderExecutedEvent$OrderExecutedEventBuilder.class
+com\tradeflux\events\OrderCancelledEvent.class
+com\tradeflux\events\enums\AssetType.class

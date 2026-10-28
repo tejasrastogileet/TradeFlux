@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wallet-service
+  namespace: tradeflux
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: wallet-service
+
+  template:
+    metadata:
+      labels:
+        app: wallet-service
+
+    spec:
+      containers:
+        - name: wallet-service
+          image: yash01er/tradeflux-wallet-service:1.0
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8085
+
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: tradeflux-secret
+                  key: POSTGRES_USER
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tradeflux-secret
+                  key: POSTGRES_PASSWORD
