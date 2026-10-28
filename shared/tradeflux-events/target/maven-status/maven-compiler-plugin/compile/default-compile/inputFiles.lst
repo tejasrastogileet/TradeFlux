@@ -1,0 +1,8 @@
+C:\Users\tejas\OneDrive\Desktop\Quant\TradeFlux\shared\tradeflux-events\src\main\java\com\tradeflux\events\enums\AssetType.java
+C:\Users\tejas\OneDrive\Desktop\Quant\TradeFlux\shared\tradeflux-events\src\main\java\com\tradeflux\events\enums\OrderSide.java
+C:\Users\tejas\OneDrive\Desktop\Quant\TradeFlux\shared\tradeflux-events\src\main\java\com\tradeflux\events\enums\OrderStatus.java
+C:\Users\tejas\OneDrive\Desktop\Quant\TradeFlux\shared\tradeflux-events\src\main\java\com\tradeflux\events\enums\OrderType.java
+C:\Users\tejas\OneDrive\Desktop\Quant\TradeFlux\shared\tradeflux-events\src\main\java\com\tradeflux\events\OrderCancelledEvent.java
+C:\Users\tejas\OneDrive\Desktop\Quant\TradeFlux\shared\tradeflux-events\src\main\java\com\tradeflux\events\OrderExecutedEvent.java
+C:\Users\tejas\OneDrive\Desktop\Quant\TradeFlux\shared\tradeflux-events\src\main\java\com\tradeflux\events\OrderPlacedEvent.java
+C:\Users\tejas\OneDrive\Desktop\Quant\TradeFlux\shared\tradeflux-events\src\main\java\com\tradeflux\events\UserRegisteredEvent.java
