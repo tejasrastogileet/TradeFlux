@@ -1,0 +1,84 @@
+jwt:
+  secretKey: vsjkfuishvruiuhuwrfutgvvbdfilviudvhakdfofureghrevnfskjvieghegkdsldlsfosjfirfreiohfrfkdsfdsugfudsfmdsnvbsfkbjgreighurhlsfjoifjrojvdsmvvbfjihurfhrufhuladfoadfjflisjfreierfrefjri
+
+server:
+  port: 9090
+
+spring:
+  application:
+    name: api-gateway
+
+  zipkin:
+    tracing:
+      endpoint: http://tradeflux-zipkin:9411/api/v2/spans
+
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+
+      routes:
+
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/api/v1/auth/**
+
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/v1/users/**
+          filters:
+            - AuthenticationFilter
+
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/api/v1/orders/**
+          filters:
+            - AuthenticationFilter
+
+        - id: portfolio-service
+          uri: lb://PORTFOLIO-SERVICE
+          predicates:
+            - Path=/api/v1/portfolio/**
+          filters:
+            - AuthenticationFilter
+
+        - id: wallet-service
+          uri: lb://WALLET-SERVICE
+          predicates:
+            - Path=/api/v1/wallet/**
+          filters:
+            - AuthenticationFilter
+
+feign:
+  hystrix:
+    enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka/
+
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: INFO
+    reactor.netty.http.client: INFO
+    reactor.netty.http.server: INFO
