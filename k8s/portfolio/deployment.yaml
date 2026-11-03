@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio-service
+  namespace: tradeflux
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: portfolio-service
+
+  template:
+    metadata:
+      labels:
+        app: portfolio-service
+
+    spec:
+      containers:
+        - name: portfolio-service
+
+          image: yash01er/tradeflux-portfolio-service:1.0
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8084
+
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: tradeflux-secret
+                  key: POSTGRES_USER
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tradeflux-secret
+                  key: POSTGRES_PASSWORD

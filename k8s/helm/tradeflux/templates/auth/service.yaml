@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.auth.name }}
+  namespace: tradeflux
+
+spec:
+  selector:
+    app: auth-service
+
+  ports:
+    - port: {{ .Values.auth.service.port }}
+      targetPort: {{ .Values.auth.service.port }}
+
+  type: ClusterIP

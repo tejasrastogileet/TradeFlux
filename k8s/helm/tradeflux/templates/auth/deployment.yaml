@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.auth.name }}
+  namespace: tradeflux
+
+spec:
+  replicas: {{ .Values.auth.replicas }}
+
+  selector:
+    matchLabels:
+      app: auth-service
+
+  template:
+    metadata:
+      labels:
+        app: auth-service
+
+    spec:
+      containers:
+        - name: auth-service
+
+          image: "{{ .Values.auth.image.repository }}:{{ .Values.auth.image.tag }}"
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8081
+
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: {{ .Values.auth.profile | quote }}
+
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: tradeflux-secret
+                  key: JWT_SECRET
+
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: tradeflux-secret
+                  key: POSTGRES_USER
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tradeflux-secret
+                  key: POSTGRES_PASSWORD

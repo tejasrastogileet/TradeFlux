@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  namespace: tradeflux
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: auth-service
+
+  template:
+    metadata:
+      labels:
+        app: auth-service
+
+    spec:
+      containers:
+        - name: auth-service
+
+          image: yash01er/tradeflux-auth-service:1.1
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8081
+
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: tradeflux-secret
+                  key: JWT_SECRET
+
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: tradeflux-secret
+                  key: POSTGRES_USER
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tradeflux-secret
+                  key: POSTGRES_PASSWORD

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery-server
+  namespace: tradeflux
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: discovery-server
+
+  template:
+    metadata:
+      labels:
+        app: discovery-server
+
+    spec:
+      containers:
+        - name: discovery-server
+
+          image: yash01er/tradeflux-discovery-server:1.0
+
+          ports:
+            - containerPort: 8761
+
+          envFrom:
+            - configMapRef:
+                name: discovery-config

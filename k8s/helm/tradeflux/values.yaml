@@ -1,0 +1,12 @@
+auth:
+  name: auth-service
+  replicas: 2
+
+  image:
+    repository: yash01er/tradeflux-auth-service
+    tag: "9.9"
+
+  service:
+    port: 8081
+
+  profile: testing
